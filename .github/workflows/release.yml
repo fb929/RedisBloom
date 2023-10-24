@@ -125,12 +125,11 @@ jobs:
             mkdir -p /workspace/usr &&
             cd ${{ github.event.repository.name }} &&
             ./sbin/setup &&
-            bash -l &&
+            export PATH=/opt/rh/devtoolset-11/root/usr/bin/:\$PATH &&
             make &&
             install -d /workspace/usr/${{ github.event.repository.name }}/ &&
             echo 1232222 $( find ./ -name redisbloom.so ) &&
-            install $( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/ &&
-            exit
+            install $( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/
             "
       # }}
 
