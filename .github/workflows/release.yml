@@ -125,7 +125,7 @@ jobs:
             mkdir -p /workspace/usr &&
             cd ${{ github.event.repository.name }} &&
             ./sbin/setup &&
-            export PATH=/opt/rh/devtoolset-11/root/usr/bin/:\$PATH &&
+            export PATH=/opt/rh/devtoolset-11/root/usr/bin/:\$HOME/.pyenv/shims:\$PATH &&
             make &&
             install -d /workspace/usr/${{ github.event.repository.name }}/ &&
             echo 1232222 $( find ./ -name redisbloom.so ) &&
