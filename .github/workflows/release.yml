@@ -36,13 +36,13 @@ jobs:
     strategy:
       matrix:
         arch:
-          - amd64
+          #- amd64
           - arm64
         os:
           - linux
         image_name:
           - amazonlinux:2
-          - ubuntu:22.04
+          #- ubuntu:22.04
         include:
           - arch: amd64
             rpm_arch: x86_64
@@ -128,7 +128,8 @@ jobs:
             bash -l &&
             make &&
             install -d /workspace/usr/${{ github.event.repository.name }}/ &&
-            install $( find ./ -name redisbloom.so) /workspace/usr/${{ github.event.repository.name }}/
+            echo 1232222 $( find ./ -name redisbloom.so ) &&
+            install $( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/
             "
       # }}
 
