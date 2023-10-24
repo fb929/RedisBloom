@@ -83,7 +83,7 @@ jobs:
               OS_RELEASE_ID="ubuntu22"
               FPM_OPTS="--deb-dist $OS_RELEASE_ID --iteration $OS_RELEASE_ID"
               FPM_ARCHITECTURE="${{ matrix.arch }}"
-              FPM_ASSET_NAME="${{ github.event.repository.name }}_${{ steps.release-version.outputs.RELEASE_VERSION }}-${OS_RELEASE_ID}_${FPM_ARCHITECTURE}.deb"
+              FPM_ASSET_NAME="$( echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]' )_${{ steps.release-version.outputs.RELEASE_VERSION }}-${OS_RELEASE_ID}_${FPM_ARCHITECTURE}.deb"
               PACKAGE_TYPE=deb
               INSTALL_REQUIRED_PACKAGES_CMD="apt-get update && apt install -y wget make gcc tar gzip debianutils pkg-config"
             ;;
