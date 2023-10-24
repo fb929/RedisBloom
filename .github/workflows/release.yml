@@ -128,8 +128,8 @@ jobs:
             export PATH=/opt/rh/devtoolset-11/root/usr/bin/:\$HOME/.pyenv/shims:\$PATH &&
             make &&
             install -d /workspace/usr/${{ github.event.repository.name }}/ &&
-            echo 1232222 $( find ./ -name redisbloom.so ) &&
-            install $( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/
+            echo 1232222 \$( find ./ -name redisbloom.so ) &&
+            install \$( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/
             "
       # }}
 
