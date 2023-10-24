@@ -129,7 +129,8 @@ jobs:
             make &&
             install -d /workspace/usr/${{ github.event.repository.name }}/ &&
             echo 1232222 $( find ./ -name redisbloom.so ) &&
-            install $( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/
+            install $( find ./ -name redisbloom.so ) /workspace/usr/${{ github.event.repository.name }}/ &&
+            exit
             "
       # }}
 
