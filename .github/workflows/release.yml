@@ -104,8 +104,9 @@ jobs:
 
       - name: download archive
         run: |
-          wget --output-document=${{ github.event.repository.name }}-${{ steps.release-version.outputs.RELEASE_VERSION }}.tar.gz https://github.com/RedisBloom/RedisBloom/archive/refs/tags/v${{ steps.release-version.outputs.RELEASE_VERSION }}.tar.gz
-          tar -zxvf ${{ github.event.repository.name }}-${{ steps.release-version.outputs.RELEASE_VERSION }}.tar.gz
+          git clone --branch v${{ steps.release-version.outputs.RELEASE_VERSION }} --recursive https://github.com/RedisBloom/RedisBloom.git
+          #wget --output-document=${{ github.event.repository.name }}-${{ steps.release-version.outputs.RELEASE_VERSION }}.tar.gz https://github.com/RedisBloom/RedisBloom/archive/refs/tags/v${{ steps.release-version.outputs.RELEASE_VERSION }}.tar.gz
+          #tar -zxvf ${{ github.event.repository.name }}-${{ steps.release-version.outputs.RELEASE_VERSION }}.tar.gz
 
       # build {{
       - name: build on ${{ matrix.image_name }}
@@ -122,9 +123,12 @@ jobs:
             echo TGZ_ASSET_NAME=${{ steps.release_info.outputs.TGZ_ASSET_NAME }}
             ${{ steps.release_info.outputs.INSTALL_REQUIRED_PACKAGES_CMD }}
             mkdir -p /workspace/usr &&
-            cd ${{ github.event.repository.name }}-${{ steps.release-version.outputs.RELEASE_VERSION }} &&
+            cd ${{ github.event.repository.name }} &&
             ./sbin/setup &&
-            make && make PREFIX=/workspace/usr install
+            bash -l &&
+            make &&
+            install -d /workspace/usr/${{ github.event.repository.name }}/ &&
+            install $( find ./ -name redisbloom.so) /workspace/usr/${{ github.event.repository.name }}/
             "
       # }}
 
